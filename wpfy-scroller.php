@@ -3,7 +3,7 @@
 Plugin Name: WPFY Scroller
 Plugin URI: https://akramuldev.com/plugins/wpfy-scoller/
 Description: A light weight WordPress plugin to add a button in bottom of the site to scroll to top.
-Version: 1.0
+Version: 1.0.0
 Author: Akramul Hasan
 Author URI: https://www.akramuldev.com
 Tag: wordpress plugin, simple, scroll to top, back to top, scroll top
