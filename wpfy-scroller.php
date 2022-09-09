@@ -3,7 +3,7 @@
 Plugin Name: WPFY Scroller
 Plugin URI: https://akramuldev.com/plugins/wpfy-scoller/
 Description: A light weight WordPress plugin to add a button in bottom of the site to scroll to top.
-Version: 1.0.0
+Version: 1.0
 Author: Akramul Hasan
 Author URI: https://www.akramuldev.com
 Tag: wordpress plugin, simple, scroll to top, back to top, scroll top
@@ -80,6 +80,19 @@ if (!class_exists('WPFYScroller')) {
                 'sanitize_callback' => 'sanitize_hex_color',
                 'default' => '#000000',
             ]);
+
+            //Icon BG Hover
+            add_settings_field(
+                'iconhoverBg',
+                __('Hover Background Color','wpfyscroll'),
+                [$this, 'bg_hover_settings_field'],
+                'wpfyscroller-settings-page',
+                'wpfyscrollersection'
+            );
+            register_setting('wpfyscrollerfields', 'iconhoverBg', [
+                'sanitize_callback' => 'sanitize_hex_color',
+                'default' => '#f5f5f5',
+            ]);
         }
         function bg_settings_field()
         {
@@ -92,7 +105,18 @@ if (!class_exists('WPFYScroller')) {
              
         <?php
         }
-
+       // function for button hover background color ;
+        function bg_hover_settings_field()
+        {
+            ?>
+     
+            <input type="text" name="iconhoverBg" value="<?php echo esc_attr(get_option(
+                'iconhoverBg'
+            )); ?>" class="cpa-color-picker-hover" >
+             
+        <?php
+        }
+        //Function for icon width
         function widthHTML()
         {
             ?>
@@ -101,7 +125,7 @@ if (!class_exists('WPFYScroller')) {
             ); ?>">
         <?php
         }
-
+        //Loading assetss
         function loadAssets()
         {
             wp_enqueue_style(
@@ -116,11 +140,20 @@ if (!class_exists('WPFYScroller')) {
                 true
             );
         }
-
+        //Markup area
         function loadHTML()
         {
             $iconWidth = get_option('iconwidth', 35);
-            $iconBg = get_option('iconBg', '#000000');
+            $iconBg = get_option('iconBg', '#000000'); 
+            $iconhoverBg = get_option('iconhoverBg', '#f5f5f5'); 
+            var_dump($iconhoverBg);
+            ?>
+                <style>
+                    a.topbutton:hover{
+                        background:<?php echo $iconhoverBg; ?> !important;
+                    }
+                </style>
+            <?php 
 
             echo '<a style="width: ' .
                 $iconWidth .
@@ -130,7 +163,7 @@ if (!class_exists('WPFYScroller')) {
                 $iconBg .
                 '" href="#" class="topbutton"><div class="icon-wrap"><span class="top-icon">&#8593;</span></div></a>';
         }
-
+        // Admin page area
         function adminPage()
         {
             add_options_page(
