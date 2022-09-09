@@ -146,7 +146,6 @@ if (!class_exists('WPFYScroller')) {
             $iconWidth = get_option('iconwidth', 35);
             $iconBg = get_option('iconBg', '#000000'); 
             $iconhoverBg = get_option('iconhoverBg', '#f5f5f5'); 
-            var_dump($iconhoverBg);
             ?>
                 <style>
                     a.topbutton:hover{
